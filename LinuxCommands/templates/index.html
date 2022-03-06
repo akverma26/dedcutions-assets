@@ -1,0 +1,122 @@
+{% extends 'base/index.html' %}
+{% load static %}
+{% load tags_filters %}
+
+{% block head-meta %}
+    <title>{{ post.title }} | Deductions | Blog by Ankit Kumar Verma</title>
+    <meta name="description" content="{{ post.description }}">
+    <meta name="keywords" content="Deductions, Deduction, Blog, {{ post.tags }}, Tech Blog, Technology, CSE, Computer, PC, Programming, Coding, Developing, C, C++, Python">
+{% endblock %}
+
+{% block head %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'post/css.css' %}">
+<script src="{% static 'base/js/jquery.js' %}"></script>
+
+<script src="{% static 'prism/prism.js' %}"></script>
+<script src="{% static 'prism/plugins/normalize-whitespace/prism-normalize-whitespace.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'prism/prism.css' %}">
+
+<link rel="stylesheet" type="text/css" href="{% static 'LinuxCommands/static/css.css' %}">
+<script src="{% static 'LinuxCommands/static/js.js' %}"></script>
+
+{% endblock %}
+
+{% block header %}
+
+<div class="header-post-details-wrapper">
+    <div class="post-title">
+        {{ post.title }}
+    </div>
+    <div class="post-info">
+        <span title="Author">
+            <i class="fas fa-pencil-alt"></i>
+            <span>{{ post.author }}</span>
+        </span>
+        <span title="Date Uploaded">
+            <i class="fas fa-calendar-plus"></i>
+            <span>{{ post.date_uploaded|date }}</span>
+        </span>
+        <span title="Date Last Modified">
+            <i class="fas fa-calendar-check"></i>
+            <span>{{ post.date_last_modified|date }}</span>
+        </span>
+    </div>
+    <div class="post-description">
+        {{ post.description }}
+    </div>
+    <div class="post-tags">
+        {% with tags=post.tags|split:" " %}
+            {% for tag in tags %}
+                <span>
+                    <i class="fas fa-tags"></i>
+                    {{ tag }}
+                </span>
+            {% endfor %}
+        {% endwith %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block main-body %}
+
+<div class="post-content">
+
+            {% for command in commands %}
+
+            <div class="step-div">
+
+                <div class="step-title-div">
+                    <div class="step-title">
+                        <div class="step-title-text">
+                            {{ command.title }}
+                        </div>
+                    </div>
+                    <div class="title-info-button-div">
+                        <div class="title-info-button">
+                            i
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="step-description-div">
+                    <div class="step-description">
+
+                        {% for cmd in command.commands %}
+            
+                        <div class="code-info-div">
+            
+                            <div class="code-div">
+                                <pre class="language-python bright">
+                                    <code>
+                                        {{ cmd.command }}
+                                    </code>
+                                </pre>
+                                <div class="code-info-button-div">
+                                    <div class="code-info-button">
+                                        i
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <div class="code-description-div">
+                                <div class="code-description">
+                                    {{ cmd.info }}
+                                </div>
+                            </div>
+            
+                        </div>
+
+                        {% endfor %}
+            
+                    </div>
+                </div>
+            
+            </div>
+
+            {% endfor %}
+
+</div>
+
+{% endblock %}
